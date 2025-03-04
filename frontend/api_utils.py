@@ -8,7 +8,7 @@ def get_api_response(question, session_id, model):
         data["session_id"] = session_id
 
     try:
-        response = requests.post("http://localhost:8000/chat", headers=headers, json=data)
+        response = requests.post("http://fastapi:8000/chat", headers=headers, json=data)
         if response.status_code == 200:
             return response.json()
         else:
@@ -21,7 +21,7 @@ def get_api_response(question, session_id, model):
 def upload_document(file):
     try:
         files = {"file": (file.name, file, file.type)}
-        response = requests.post("http://localhost:8000/upload-doc", files=files)
+        response = requests.post("http://fastapi:8000/upload-doc", files=files)
         if response.status_code == 200:
             return response.json()
         else:
@@ -33,7 +33,7 @@ def upload_document(file):
 
 def list_documents():
     try:
-        response = requests.get("http://localhost:8000/list-documents")
+        response = requests.get("http://fastapi:8000/list-documents")
         if response.status_code == 200:
             return response.json()
         else:
@@ -48,7 +48,7 @@ def delete_document(file_id):
     data = {"file_id": file_id}
 
     try:
-        response = requests.delete("http://localhost:8000/delete-document", headers=headers, json=data)
+        response = requests.delete("http://fastapi:8000/delete-document", headers=headers, json=data)
         if response.status_code == 200:
             return response.json()
         else:

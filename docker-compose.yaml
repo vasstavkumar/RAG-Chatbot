@@ -1,0 +1,26 @@
+services:
+  fastapi:
+    env_file:
+      - ./.env
+    build:
+      context: ./backend  
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    networks:
+      - python-network
+
+  streamlit:
+    build:
+      context: ./frontend  
+      dockerfile: Dockerfile
+    depends_on:
+      - fastapi
+    ports:
+      - "8501:8501"
+    networks:
+      - python-network
+
+networks:
+  python-network:
+    driver: bridge

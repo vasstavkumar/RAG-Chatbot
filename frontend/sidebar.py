@@ -5,13 +5,14 @@ def display_sidebar():
     model_options = ['llama3-8b-8192']
     st.sidebar.selectbox("Select Model", options=model_options, key="model")
 
-    uploaded_file = st.sidebar.file_uploader("Choose a file", type=["pdf", "docx"])
+    uploaded_file = st.sidebar.file_uploader("Choose a file", type=["pdf", "docx"], accept_multiple_files=True)
     if uploaded_file and st.sidebar.button("Upload"):
         with st.spinner("Uploading..."):
-            upload_response = upload_document(uploaded_file)
-            if upload_response:
-                st.sidebar.success(f"File uploaded successfully with ID {upload_response['file_id']}.")
-                st.session_state.documents = list_documents()
+            for files in uploaded_file:
+                upload_response = upload_document(files)
+                if upload_response:
+                    st.sidebar.success(f"File uploaded successfully with ID {upload_response['file_id']}.")
+                    st.session_state.documents = list_documents()
 
     st.sidebar.header("Uploaded Documents")
     if st.sidebar.button("Refresh Document List"):
