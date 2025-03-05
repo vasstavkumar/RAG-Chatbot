@@ -1,10 +1,7 @@
-FROM python:3.11
+FROM vass5/frontend-base:latest
 
 WORKDIR /app
 
 COPY . /app
-
-RUN pip install --no-cache-dir --upgrade pip && pip install -r requirements.txt
-
 
 CMD streamlit run streamlit_app.py --server.port 8501 --server.address 0.0.0.0

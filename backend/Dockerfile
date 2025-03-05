@@ -1,12 +1,9 @@
-FROM python:3.11
+FROM vass5/backend-base:latest
 
 WORKDIR /app
 
 COPY . /app
 
-RUN apt update && apt install -y sqlite3
-
-RUN pip install --no-cache-dir --upgrade pip && pip install -r requirements.txt
 
 ENV PYTHONPATH=/app
 
