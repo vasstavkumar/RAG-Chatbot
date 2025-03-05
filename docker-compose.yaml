@@ -7,6 +7,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
+    volumes:
+      - rag_db:/app
     networks:
       - python-network
 
@@ -24,3 +26,6 @@ services:
 networks:
   python-network:
     driver: bridge
+
+volumes:
+  rag_db:
